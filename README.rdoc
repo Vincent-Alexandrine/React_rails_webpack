@@ -1,8 +1,34 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Here is a quick rails project using webpack and the asset pipeline for serving multiple pages rails app.
 
+It has React
+
+== 1 Asset pipeline
+
+in the '/app/assets/javascripts/application.js', the '//= require_tree .' as been removed. Pages have manifest files instead, 'app/assets/javascripts/clients.js' for instance here, which is called the 'clients-bundle.js' in.
+The 'application.js' file will probably be removed later.
+
+== 2 webpack
+
+In the 'webpack.config.js', the entry will create the bundles needed.
+Here, the 'clients: "./frontend/clients/index.js"' will create the 'clients-bundle.js'.
+
+== 3 /frontend/
+
+This folder contains all the js and components needed for the frontend. Your entries will require what would be needed in your bundle.
+
+The 'app/assets/javascripts' only contains bundles and manifest files.
+
+
+== 4 app/config/initializers/assets.rb
+
+In this file, in the 'Rails.application.config.assets.precompile', you will had your manifest files.
+
+
+== 5 for later
+
+This is a quick and dirty version, but a functional one (normally), a lot will be done for cleaning, and adding moe details about configurations.
 Things you may want to cover:
 
 * Ruby version
