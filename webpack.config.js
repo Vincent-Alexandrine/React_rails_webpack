@@ -1,48 +1,51 @@
+/**
+ * Created by sschindler on 31.03.16.
+ */
 var path = require('path');
-
-module.exports = {
-  context: path.join(__dirname, '../', '../'),
-  entry: {
-    clients: "./frontend/clients/index.js"
-  },
-  output: {
+var webpack = require('webpack');
+var config = module.exports = {
+    // the base path which will be used to resolve entry points
+    context: __dirname,
+    // the main entry point for our application's frontend JS
+    entry: {
+      clients:'./frontend/clients/index.js'
+    },
+};
+config.output = {
+    // this is our app/assets/javascripts directory, which is part of the Sprockets pipeline
     path: path.join(__dirname, 'app', 'assets', 'javascripts'),
+    // the filename of the compiled bundle, e.g. app/assets/javascripts/bundle.js
     filename: "[name]-bundle.js",
-    publicPath: "/assets/"
-  },
-  module: {
+    // if the webpack code-splitting feature is enabled, this is the path it'll use to download bundles
+    publicPath: '/assets',
+};
+config.resolve = {
+    // tell webpack which extensions to auto search when it resolves modules. With this,
+    // you'll be able to do `require('./utils')` instead of `require('./utils.js')`
+    extensions: ['', '.js', '.coffee', '.jsx'],
+    // by default, webpack will search in `web_modules` and `node_modules`. Because we're using
+    // Bower, we want it to look in there too
+    //modulesDirectories: [ 'node_modules', 'bower_components' ],
+};
+/*
+config.plugins = [
+    // we need this plugin to teach webpack how to find module entry points for bower files,
+    // as these may not have a package.json file
+    new webpack.ResolverPlugin([
+        new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin('.bower.json', ['main'])
+    ])
+];
+*/
+config.module = {
     loaders: [
       {
-        test : /.jsx?$/,
+        test : /\.jsx$/,
         loader : 'babel',
         exclude : /node_modules/,
         query : {
           presets : ['es2015', 'react']
         }
-      }
-      { test: /\.coffee$/,
-        loader: 'coffee-loader' },
-      { test: /\.less$/,
-        loader: "style-loader!css-loader!less-loader"},
-      { test: /\.woff$/,
-        loader: "url-loader?prefix=font/&limit=5000" }
+      },
+      { test: /\.coffee$/, loader: 'coffee-loader' }
     ]
-  },
-  resolve: {
-    extensions: ['', 'js', 'jsx', 'coffee']
-    alias: {
-      ap: path.join(__dirname, "frontend", "ap"),
-      shared: path.join(__dirname, "frontend", "ap", "shared")
-    }
-  }
-  plugins: [
-    new webpack.optimize.CommonsChunkPlugin('common-bundle.js')
-    //uncomment this plugin if you wanna use jQuery globally
-/***********
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    })
-***********/
-  ]
-}
+};
