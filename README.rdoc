@@ -11,6 +11,14 @@ The 'application.js' file will probably be removed later.
 
 == 2 webpack
 
+I'm not quite sure but you might need to install webpack globally for using the command lines (duuh)
+
+Run this command line for letting webpack bundling yours scripts each time a dependency changes. (ctrl+c for stopping)
+
+```
+$ webpack --watch --display-errors
+```
+
 In the 'webpack.config.js', the entry will create the bundles needed.
 Here, the 'clients: "./frontend/clients/index.js"' will create the 'clients-bundle.js'.
 
@@ -24,7 +32,6 @@ The 'app/assets/javascripts' only contains bundles and manifest files.
 == 4 app/config/initializers/assets.rb
 
 In this file, in the 'Rails.application.config.assets.precompile', you will had your manifest files.
-
 
 == 5 for later
 
