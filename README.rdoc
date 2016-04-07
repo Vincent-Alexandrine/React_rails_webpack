@@ -15,9 +15,8 @@ I'm not quite sure but you might need to install webpack globally for using the 
 
 Run this command line for letting webpack bundling yours scripts each time a dependency changes. (ctrl+c for stopping)
 
-```
-$ webpack --watch --display-errors
-```
+    $ webpack --watch --display-errors
+
 
 In the 'webpack.config.js', the entry will create the bundles needed.
 Here, the 'clients: "./frontend/clients/index.js"' will create the 'clients-bundle.js'.
