@@ -1,3 +1,5 @@
+= old, very old...
+
 == README
 
 Here is a quick rails project using webpack and the asset pipeline for serving multiple pages rails app.
